@@ -1,0 +1,155 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f44336;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.pokedex {
+    background-color: #ff5252;
+    border-radius: 15px;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+input {
+    padding: 10px;
+    width: 230px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+button {
+    padding: 10px;
+    background-color: #2196F3;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+button:hover {
+    background-color: #1976D2;
+}
+
+
+.pokemon-card {
+    background-color: white;
+    color: black;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+.pokemon-card img {
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+
+.loading, .error {
+    margin-top: 20px;
+    color: white;
+    font-size: 18px;
+}
+
+
+.error {
+    color: yellow;
+}
+
+
+.stats {
+    text-align: left;
+    margin-top: 15px;
+}
+
+
+.stats ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.stats li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.stats li span {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    height: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+
+.stats li span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #2196F3;
+    border-radius: 8px;
+    width: 100%;
+}
+
+
+
+
+.hp::after {
+    width: 35%;
+}
+
+
+.attack::after {
+    width: 55%;
+}
+
+
+.defense::after {
+    width: 40%;
+}
+
+
+
+
+.pokemon-type {
+    background-color: #fdd835;
+    color: black;
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+}
