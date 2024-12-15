@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO-List</title>
+    <style>
+        /* General styling for the body and centering the content */
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f5f5f5;
+    }
+
+    /* Styling the container for the To-Do list */
+    #toDoList {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 350px;
+    }
+
+    /* Styling the title */
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Input field styling */
+    #taskInput {
+        width: 65%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    /* Add Task button styling */
+    #addTaskButton {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #addTaskButton:hover {
+        background-color: #218838;
+    }
+
+    /* Styling for the task list container */
+    .list {
+        margin-top: 20px;
+    }
+
+    /* Styling each task item */
+    #taskList li {
+        background-color: white;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    /* Task text */
+    #taskList li span {
+        flex: 1;
+        text-align: left;
+    }
+
+    /* Delete button styling */
+    #taskList li button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #taskList li button:hover {
+        background-color: #c82333;
+    }
+
+    /* Class for marking tasks as done */
+    .line-through {
+        text-decoration: line-through;
+        color: #999;
+    }
+
+    /* Cursor pointer class for interactive elements */
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="toDoList" class="toDo_list">
+        <h1>TO-DO-LIST</h1>
+        <input type="text" id="taskInput" placeholder="Enter your task here">
+        <button type="button" id="addTaskButton">Add Task</button>
+    </div>
+    <div class="list">
+        <ul id="taskList">
+            <!-- List of tasks will be added here -->
+        </ul>
+    </div>
+    <script>
+        // Add event listener to the "Add Task" button
+        document.getElementById('addTaskButton').addEventListener('click', function(){
+            newElement();
+        });
+
+        function newElement() {
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+            const taskValue = taskInput.value.trim();
+
+            if (taskValue === '') {
+                alert('Please enter a task');
+                return;
+            }
+
+            const taskItem = document.createElement('li');
+            taskItem.innerHTML = 
+            `
+                <span onclick="taskDone(this)" class="cursor-pointer">${taskValue}</span>
+                <button onclick="taskDelete(this)" class="cursor-pointer">Delete</button>
+            `;
+            taskList.appendChild(taskItem);
+            taskInput.value = '';  // Clear the input field after adding the task
+        }
+
+        function taskDelete(element) {
+            const li = element.parentElement;
+            li.remove();
+        }
+
+        function taskDone(taskElement) {
+            taskElement.classList.toggle('line-through');
+        }
+    </script>
+</body>
+</html>
