@@ -1,0 +1,61 @@
+/* Dark Themed Notifications with Animations */
+
+.notification {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeInSlideUp 0.6s ease;
+    transition: background-color 0.3s ease;
+}
+
+/* Success Notification */
+.notification.success {
+    background-color: #2d6a4f;
+    border: 1px solid #52b788;
+}
+
+/* Error Notification */
+.notification.error {
+    background-color: #bc4749;
+    border: 1px solid #ff7d7d;
+}
+
+/* Button Styles with Dark Theme and Animations */
+.navigation-buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #bb86fc;
+    color: #121212;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.navigation-buttons button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.navigation-buttons button:hover:not(:disabled) {
+    background-color: #9b5fe0;
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
