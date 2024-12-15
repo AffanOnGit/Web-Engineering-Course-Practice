@@ -3,127 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Concepts Demo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Jquery HTML DOM Practise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .highlight { background-color: yellow; }
+        .success { color: green; }
+        .error { color: red; }
+        .hidden { display: none; }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .active { background-color: #e0e0e0; }
+        #dimensionBox {
+            width: 200px;
+            height: 100px;
+            background-color: #ddd;
+            padding: 20px;
+            border: 5px solid #999;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <p id="meesage">JS DOM</p>
+    <h1>jQuery Concepts Demo</h1>
 
-        <input type="radio" name="language" value="HTML">
-        <input type="radio" name="language" value="Python">
-
-        <h1>1st Heading</h1>
-        <h1>2nd Heading</h1>
-        <h1>3rd Heading</h1>
-        <h1>4th Heading</h1>
-
-        <h1 class="message">1st Heading</h1>
-        <h1 class="message">2nd Heading</h1>
-
+    <!-- 1. jQuery vs JavaScript DOM -->
+    <div class="section">
+        <h2>1. DOM Manipulation Comparison</h2>
+        <button id="jqueryBtn">jQuery Hide</button>
+        <button id="jsBtn">JavaScript Hide</button>
+        <div id="target1" class="box"></div>
+        <div id="target2" class="box"></div>
     </div>
 
-    <div id="container">
-        <h1 class="message">Inner heading</h1>
-        <h1 class="message">Inner heading</h1>
+    <!-- 2. DOM Tree Traversal -->
+    <div class="section">
+        <h2>2. DOM Tree Traversal</h2>
+        <div id="family">
+            <div class="parent">
+                Parent
+                <div class="child">Child 1</div>
+                <div class="child">Child 2</div>
+                <div class="child">Child 3</div>
+            </div>
+        </div>
+        <button id="findParent">Find Parent</button>
+        <button id="findChildren">Find Children</button>
+        <button id="findSiblings">Find Siblings</button>
+        <div id="traversalResult"></div>
     </div>
 
-    <div class ="title">
-        <p class="text">Welcome</p>
-        <p class="text">Welcome</p>
-        <p class="text">Welcome 3</p>
-        <p class="sibling-tester">Welcome</p>
-        <p class="text">Welcome 4</p>
+    <!-- 3. Selectors Demo -->
+    <div class="section">
+        <h2>3. Selectors</h2>
+        <div id="selectorDemo">
+            <p class="intro">Introduction paragraph</p>
+            <p>Regular paragraph</p>
+            <a href="https://example.com">Link 1</a>
+            <a href="file.pdf">PDF Link</a>
+            <ul>
+                <li>First item</li>
+                <li>Second item</li>
+                <li>Third item</li>
+            </ul>
+        </div>
+        <button id="basicSelector">Basic Selectors</button>
+        <button id="attributeSelector">Attribute Selectors</button>
+        <button id="pseudoSelector">Pseudo Selectors</button>
+        <div id="selectorResult"></div>
     </div>
 
-    <div class="eventCont">
-        <button type="button">Click me</button>
+    <!-- 4. Content and Attributes -->
+    <div class="section">
+        <h2>4. Content and Attributes</h2>
+        <div id="contentDemo">
+            <p id="textContent">Original Text</p>
+            <div id="htmlContent"><span>Original HTML</span></div>
+            <img id="demoImage" src="placeholder.jpg" alt="demo">
+        </div>
+        <button id="changeText">Change Text</button>
+        <button id="changeHtml">Change HTML</button>
+        <button id="changeAttr">Change Attribute</button>
+    </div>
+
+    <!-- 5. CSS Manipulation -->
+    <div class="section">
+        <h2>5. CSS Manipulation</h2>
+        <div id="cssDemo" class="box"></div>
+        <button id="addClassBtn">Add Class</button>
+        <button id="removeClassBtn">Remove Class</button>
+        <button id="toggleClassBtn">Toggle Class</button>
+        <button id="cssPropertiesBtn">Change CSS Properties</button>
+    </div>
+
+    <!-- 6. Dimensions -->
+    <div class="section">
+        <h2>6. Dimensions</h2>
+        <div id="dimensionBox">Dimension Demo</div>
+        <button id="getDimensions">Get Dimensions</button>
+        <div id="dimensionResult"></div>
+    </div>
+
+    <!-- 7. Event Handling -->
+    <div class="section">
+        <h2>7. Event Handling</h2>
+        <form id="demoForm">
+            <input type="text" id="demoInput" placeholder="Type something...">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="eventBox" class="box"></div>
+        <div id="eventResult"></div>
     </div>
 
     <script>
         $(document).ready(function() {
-            // Element Selection
-            let msg = $('#meesage');
-            console.log(msg); // Outputs: jQuery object containing element with id 'meesage'
-
-            let button = $('input[name="language"]');
-            console.log(button); // Outputs: jQuery object containing all input elements with name 'language'
-
-            let headings = $('h1');
-            console.log(headings); // Outputs: jQuery object containing all h1 elements
-
-            let msg_1 = $('.message');
-            console.log(msg_1); // Outputs: jQuery object containing all elements with class 'message'
-
-            let msg_2 = $('.message').first();
-            console.log(msg_2); // Outputs: jQuery object containing first element with class 'message'
-            msg_2 = $('.message');
-            console.log(msg_2); // Outputs: jQuery object containing all elements with class 'message'
-
-            let msg_3 = $('#container .message');
-            console.log(msg_3); // Outputs: jQuery object containing elements with class 'message' inside #container
-
-            msg_3 = $('#container h1');
-            console.log(msg_3); // Outputs: jQuery object containing all h1 elements inside #container
-
-            // Traversing
-            let text = $('.text').first();
-            console.log(text.parent()); // Outputs: Parent element of the first .text element
-
-            let title = $('.title');
-            console.log(title.children().length); // Outputs: Number of direct children in .title element
-            console.log(title.children().first()); // Outputs: First child element of .title
-            console.log(title.children().last()); // Outputs: Last child element of .title
-            console.log(title.contents()); // Outputs: All nodes inside .title including text nodes
-
-            let sibling = $('.sibling-tester');
-            console.log(sibling.prev()); // Outputs: Previous sibling element of .sibling-tester
-            console.log(sibling.next()); // Outputs: Next sibling element of .sibling-tester
-
-            // DOM Manipulation
-            let div = $('<div><p>Added paragraph</p></div>');
-            $('body').append(div);
-            div.addClass('new-class');
-            div.attr('id', 'new-id');
-            console.log(div); // Outputs: Created jQuery object with new div element
-
-            // Text Content
-            let para = $('.text');
-            console.log(para.text()); // Outputs: Text content of first .text element without HTML
-            console.log(para.html()); // Outputs: HTML content of first .text element
-            para.html('<b>Changed</b>');
-
-            // Attribute Methods
-            let input = $('input').first();
-            console.log(input.attr('type')); // Outputs: Current type attribute value of first input
-            
-            input.attr('type', 'checkbox');
-            console.log(input.attr('type')); // Outputs: 'checkbox' (new type value)
-            
-            input.removeAttr('type');
-            console.log(input.attr('type')); // Outputs: undefined (type attribute removed)
-            
-            console.log(input.is('[type]')); // Outputs: false (checks if type attribute exists)
-
-            // Styling
-            let heading = $('h1').first();
-            heading.css({
-                'color': 'red',
-                'background-color': 'black',
-                'font-size': '50px'
-            });
-            console.log(heading.css('color')); // Outputs: 'red'
-            console.log(heading.css('background-color')); // Outputs: 'black'
-            console.log(heading.css('font-size')); // Outputs: '50px'
-
-            // Events
-            $('button').click(function() {
-                alert('Button clicked from function');
+            // 1. DOM Manipulation Comparison
+            $('#jqueryBtn').click(function() {
+                $('#target1').hide(1000);
             });
 
-            // Event Listener
-            $('button').on('click', function() {
-                alert('Button clicked from event listener');
+            document.getElementById('jsBtn').onclick = function() {
+                document.getElementById('target2').style.display = 'none';
+            };
+
+            // 2. DOM Tree Traversal
+            $('#findParent').click(function() {
+                $('.child').parent().addClass('highlight');
+                $('#traversalResult').text('Parent element highlighted');
+            });
+
+            $('#findChildren').click(function() {
+                $('.parent').children().addClass('highlight');
+                $('#traversalResult').text('Child elements highlighted');
+            });
+
+            $('#findSiblings').click(function() {
+                $('.child:first').siblings().addClass('highlight');
+                $('#traversalResult').text('Sibling elements highlighted');
+            });
+
+            // 3. Selectors Demo
+            $('#basicSelector').click(function() {
+                // Reset
+                $('#selectorDemo *').removeClass('highlight');
+                
+                // Basic selectors
+                $('.intro').addClass('highlight');
+                $('ul li:first').addClass('highlight');
+                $('#selectorResult').html('Highlighted: intro class and first li');
+            });
+
+            $('#attributeSelector').click(function() {
+                // Reset
+                $('#selectorDemo *').removeClass('highlight');
+                
+                // Attribute selectors
+                $('a[href$=".pdf"]').addClass('highlight');
+                $('#selectorResult').html('Highlighted: PDF links');
+            });
+
+            $('#pseudoSelector').click(function() {
+                // Reset
+                $('#selectorDemo *').removeClass('highlight');
+                
+                // Pseudo selectors
+                $('li:even').addClass('highlight');
+                $('#selectorResult').html('Highlighted: even li elements');
+            });
+
+            // 4. Content and Attributes
+            $('#changeText').click(function() {
+                $('#textContent').text('Text has been changed!');
+            });
+
+            $('#changeHtml').click(function() {
+                $('#htmlContent').html('<em>HTML has been changed!</em>');
+            });
+
+            $('#changeAttr').click(function() {
+                $('#demoImage').attr('alt', 'Changed alt text');
+                alert('Image alt attribute changed to: "Changed alt text"');
+            });
+
+            // 5. CSS Manipulation
+            $('#addClassBtn').click(function() {
+                $('#cssDemo').addClass('highlight');
+            });
+
+            $('#removeClassBtn').click(function() {
+                $('#cssDemo').removeClass('highlight');
+            });
+
+            $('#toggleClassBtn').click(function() {
+                $('#cssDemo').toggleClass('highlight');
+            });
+
+            $('#cssPropertiesBtn').click(function() {
+                $('#cssDemo').css({
+                    backgroundColor: 'red',
+                    borderRadius: '50%',
+                    transform: 'rotate(45deg)'
+                });
+            });
+
+            // 6. Dimensions
+            $('#getDimensions').click(function() {
+                const $box = $('#dimensionBox');
+                const dimensions = {
+                    width: $box.width(),
+                    height: $box.height(),
+                    innerWidth: $box.innerWidth(),
+                    innerHeight: $box.innerHeight(),
+                    outerWidth: $box.outerWidth(),
+                    outerHeight: $box.outerHeight()
+                };
+
+                $('#dimensionResult').html(`
+                    <p>Content: ${dimensions.width}x${dimensions.height}</p>
+                    <p>Including padding: ${dimensions.innerWidth}x${dimensions.innerHeight}</p>
+                    <p>Including border: ${dimensions.outerWidth}x${dimensions.outerHeight}</p>
+                `);
+            });
+
+            // 7. Event Handling
+            $('#demoInput').on({
+                focus: function() {
+                    $(this).css('background-color', '#f0f0f0');
+                },
+                blur: function() {
+                    $(this).css('background-color', '');
+                },
+                keyup: function() {
+                    $('#eventResult').text('Typing: ' + $(this).val());
+                }
+            });
+
+            $('#demoForm').submit(function(e) {
+                e.preventDefault();
+                $('#eventResult').html('<span class="success">Form submitted!</span>');
+            });
+
+            $('#eventBox').on({
+                mouseenter: function() {
+                    $(this).css('background-color', 'red');
+                },
+                mouseleave: function() {
+                    $(this).css('background-color', 'blue');
+                },
+                click: function() {
+                    $(this).fadeOut(500).fadeIn(500);
+                }
             });
         });
     </script>
