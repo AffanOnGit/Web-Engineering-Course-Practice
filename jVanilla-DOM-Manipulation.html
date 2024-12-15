@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS HTML DOM Practise</title>
+</head>
+<body>
+    <div>
+        <p id="meesage">JS DOM</p>
+
+        <input type="radio" name="language" value="HTML">
+        <input type="radio" name="language" value="Python">
+
+        <h1>1st Heading</h1>
+        <h1>2nd Heading</h1>
+        <h1>3rd Heading</h1>
+        <h1>4th Heading</h1>
+
+        <h1 class="message">1st Heading</h1>
+        <h1 class="message">2nd Heading</h1>
+
+    </div>
+
+    <div id="container">
+        <h1 class="message">Inner heading</h1>
+        <h1 class="message">Inner heading</h1>
+    </div>
+
+    <div class ="title">
+        <p class="text">Welcome</p>
+        <p class="text">Welcome</p>
+        <p class="text">Welcome 3</p>
+        <p class="sibling-tester">Welcome</p>
+        <p class="text">Welcome 4</p>
+    </div>
+
+    <div class="eventCont">
+        <button type="button">Click me</button>
+    </div>
+
+    <script>
+        let msg = document.getElementById('meesage'); //select the first element with id="message"
+        console.log(msg); //prints entire line 15
+
+        let button = document.getElementsByName("language"); //returns a list of node with name of language
+        console.log(button);
+
+        let headings = document.getElementsByTagName("h1"); //returns collection of headings with this tag.
+        console.log(headings);
+
+        let msg_1 = document.getElementsByClassName("message");
+        console.log(msg_1);
+
+        //finding by CSS selector:
+        let msg_2 = document.querySelector(".message"); //gets the first alement.
+        console.log(msg_2);
+        msg_2 = document.querySelectorAll(".message");
+        console.log(msg_2);
+
+        let cont = document.getElementById("container");
+        let msg_3 = cont.querySelectorAll(".message");
+        console.log(msg_3);
+
+        msg_3 = document.querySelectorAll("#container h1");
+        console.log(msg_3); //should give list of all h1 in container id div
+
+        //traverrsing elements
+        let text = document.querySelector(".text");
+        console.log(text.parentNode); //will display the parent node of the element text
+
+        let title = document.querySelector(".title");
+        console.log(title.childElementCount);
+        console.log(title.firstChild)
+        console.log(title.lastChild);
+        console.log(title.childNodes);
+
+        let sibling = document.querySelector(".sibling-tester");
+        console.log(sibling.previousElementSibling);
+        console.log(sibling.nextElementSibling);
+
+
+        //changing HTML elements
+        let div = document.createElement("div");
+        div.innerHTML = "<p>Added paragraph</p>";
+        document.body.appendChild(div); //adds the div to the body of the document
+        div.className = "new-class";
+        div.id = "new-id";
+        console.log(div);
+
+        //text content
+        let para = document.querySelector(".text");
+        console.log(para.textContent); //returns the text content of the element
+        console.log(para.innerHTML); //returns the inner HTML of the element
+        para.innerHTML = "<b>Changed</b>";
+        
+        //remove child method
+        let parent = document.querySelector(".title");
+        let child = document.querySelector(".sibling-tester");
+        parent.removeChild(child);
+
+        
+        
+        //attribute methods
+        let input = document.querySelector("input");    
+        console.log(input.getAttribute("type"));
+        
+        input.setAttribute("type", "checkbox");
+        console.log(input.getAttribute("type"));
+
+        input.removeAttribute("type");
+        console.log(input.getAttribute("type"));
+
+        console.log(input.hasAttribute("type"));
+
+        //changing element style
+        let heading = document.querySelector("h1");
+        heading.style.color = "red";
+        heading.style.backgroundColor = "black";
+        heading.style.fontSize = "50px";
+        console.log(heading.style.color);
+        console.log(heading.style.backgroundColor);
+        console.log(heading.style.fontSize);
+
+
+        //events
+        let button_1 = document.querySelector("button");
+        button_1.onclick = function() {
+            alert("Button clicked from function");
+        } 
+
+        //managing event listeners
+        let button_2 = document.querySelector("button");
+        button_2.addEventListener("click", function() {
+            alert("Button clicked from event listener");
+        });
+    </script>
+</body>
+</html>
