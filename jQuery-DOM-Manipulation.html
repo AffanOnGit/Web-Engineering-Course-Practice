@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Jquery HTML DOM Practise</title>
+</head>
+<body>
+    <div>
+        <p id="meesage">JS DOM</p>
+
+        <input type="radio" name="language" value="HTML">
+        <input type="radio" name="language" value="Python">
+
+        <h1>1st Heading</h1>
+        <h1>2nd Heading</h1>
+        <h1>3rd Heading</h1>
+        <h1>4th Heading</h1>
+
+        <h1 class="message">1st Heading</h1>
+        <h1 class="message">2nd Heading</h1>
+
+    </div>
+
+    <div id="container">
+        <h1 class="message">Inner heading</h1>
+        <h1 class="message">Inner heading</h1>
+    </div>
+
+    <div class ="title">
+        <p class="text">Welcome</p>
+        <p class="text">Welcome</p>
+        <p class="text">Welcome 3</p>
+        <p class="sibling-tester">Welcome</p>
+        <p class="text">Welcome 4</p>
+    </div>
+
+    <div class="eventCont">
+        <button type="button">Click me</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Element Selection
+            let msg = $('#meesage');
+            console.log(msg); // Outputs: jQuery object containing element with id 'meesage'
+
+            let button = $('input[name="language"]');
+            console.log(button); // Outputs: jQuery object containing all input elements with name 'language'
+
+            let headings = $('h1');
+            console.log(headings); // Outputs: jQuery object containing all h1 elements
+
+            let msg_1 = $('.message');
+            console.log(msg_1); // Outputs: jQuery object containing all elements with class 'message'
+
+            let msg_2 = $('.message').first();
+            console.log(msg_2); // Outputs: jQuery object containing first element with class 'message'
+            msg_2 = $('.message');
+            console.log(msg_2); // Outputs: jQuery object containing all elements with class 'message'
+
+            let msg_3 = $('#container .message');
+            console.log(msg_3); // Outputs: jQuery object containing elements with class 'message' inside #container
+
+            msg_3 = $('#container h1');
+            console.log(msg_3); // Outputs: jQuery object containing all h1 elements inside #container
+
+            // Traversing
+            let text = $('.text').first();
+            console.log(text.parent()); // Outputs: Parent element of the first .text element
+
+            let title = $('.title');
+            console.log(title.children().length); // Outputs: Number of direct children in .title element
+            console.log(title.children().first()); // Outputs: First child element of .title
+            console.log(title.children().last()); // Outputs: Last child element of .title
+            console.log(title.contents()); // Outputs: All nodes inside .title including text nodes
+
+            let sibling = $('.sibling-tester');
+            console.log(sibling.prev()); // Outputs: Previous sibling element of .sibling-tester
+            console.log(sibling.next()); // Outputs: Next sibling element of .sibling-tester
+
+            // DOM Manipulation
+            let div = $('<div><p>Added paragraph</p></div>');
+            $('body').append(div);
+            div.addClass('new-class');
+            div.attr('id', 'new-id');
+            console.log(div); // Outputs: Created jQuery object with new div element
+
+            // Text Content
+            let para = $('.text');
+            console.log(para.text()); // Outputs: Text content of first .text element without HTML
+            console.log(para.html()); // Outputs: HTML content of first .text element
+            para.html('<b>Changed</b>');
+
+            // Attribute Methods
+            let input = $('input').first();
+            console.log(input.attr('type')); // Outputs: Current type attribute value of first input
+            
+            input.attr('type', 'checkbox');
+            console.log(input.attr('type')); // Outputs: 'checkbox' (new type value)
+            
+            input.removeAttr('type');
+            console.log(input.attr('type')); // Outputs: undefined (type attribute removed)
+            
+            console.log(input.is('[type]')); // Outputs: false (checks if type attribute exists)
+
+            // Styling
+            let heading = $('h1').first();
+            heading.css({
+                'color': 'red',
+                'background-color': 'black',
+                'font-size': '50px'
+            });
+            console.log(heading.css('color')); // Outputs: 'red'
+            console.log(heading.css('background-color')); // Outputs: 'black'
+            console.log(heading.css('font-size')); // Outputs: '50px'
+
+            // Events
+            $('button').click(function() {
+                alert('Button clicked from function');
+            });
+
+            // Event Listener
+            $('button').on('click', function() {
+                alert('Button clicked from event listener');
+            });
+        });
+    </script>
+</body>
+</html>
