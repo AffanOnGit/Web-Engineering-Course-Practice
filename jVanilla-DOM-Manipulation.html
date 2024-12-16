@@ -36,7 +36,7 @@
     </div>
 
     <div class="eventCont">
-        <button type="button">Click me</button>
+        <button id="button1" type="button">Click me</button>
     </div>
 
     <script>
@@ -58,7 +58,7 @@
         msg_2 = document.querySelectorAll(".message");
         console.log(msg_2);
 
-        let cont = document.getElementById("container");
+        let cont = document.getElementById("container"); //parent
         let msg_3 = cont.querySelectorAll(".message");
         console.log(msg_3);
 
@@ -124,10 +124,10 @@
 
 
         //events
-        let button_1 = document.querySelector("button");
-        button_1.onclick = function() {
+        let button_1 = document.querySelector("#button1");
+        button_1.onclick = function () {
             alert("Button clicked from function");
-        } 
+        }
 
         //managing event listeners
         let button_2 = document.querySelector("button");
