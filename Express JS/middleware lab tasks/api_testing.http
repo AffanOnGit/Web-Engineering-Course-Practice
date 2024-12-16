@@ -1,0 +1,363 @@
+##### TASK 1: #####
+
+### Simulate a duel between two wizards
+POST http://localhost:3000/duel
+Content-Type: application/json
+
+{
+    "wizard1": {
+        "id": 1,
+        "name": "Gandalf",
+        "type": "fire",
+        "health": 100,
+        "energy": 80
+    },
+    "wizard2": {
+        "id": 2,
+        "name": "Frosty",
+        "type": "ice",
+        "health": 90,
+        "energy": 50
+    }
+}
+
+### Get details of all wizards
+GET http://localhost:3000/wizards
+
+### Upgrade a wizard’s stats
+PUT http://localhost:3000/wizards/upgrade
+Content-Type: application/json
+
+{
+    "id": 2,
+    "attack": 10,
+    "defense": 5,
+    "health": 20,
+    "energy": 10
+}
+
+### Get details of all wizards again after upgrade
+GET http://localhost:3000/wizards
+
+### Simulate a duel between two wizards again
+POST http://localhost:3000/duel
+Content-Type: application/json
+
+{
+    "wizard1": {
+        "id": 1,
+        "name": "Gandalf",
+        "type": "fire",
+        "health": 120,
+        "energy": 90
+    },
+    "wizard2": {
+        "id": 3,
+        "name": "Stormbringer",
+        "type": "storm",
+        "health": 80,
+        "energy": 20
+    }
+}
+
+### Task 2 API Testing
+
+
+### 1. Successful Loan Application (Good Credit Score, Low Debt)
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "creditScore": 750,
+  "currentDebt": 300,
+  "accountBalance": 2500
+}
+
+### 2. Loan Application with Low Credit Score (Should be Denied)
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+  "customerId": 2,
+  "creditScore": 550,
+  "currentDebt": 800,
+  "accountBalance": 1500
+}
+
+### 3. Loan Application with High Debt-to-Income Ratio
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+  "customerId": 3,
+  "creditScore": 680,
+  "currentDebt": 1800,
+  "accountBalance": 1200
+}
+
+### 4. Loan Application with Low Account Balance
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "creditScore": 700,
+  "currentDebt": 500,
+  "accountBalance": 800
+}
+
+### 5. Invalid Loan Application (Missing Fields)
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "creditScore": 700
+}
+
+### 6. Invalid Loan Application (Wrong Data Types)
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "creditScore": "700",
+  "currentDebt": "500",
+  "accountBalance": "1200"
+}
+
+### Check Loan Status Tests
+
+### 7. Check Existing Customer Loan Status
+GET http://localhost:3000/customers/loan-status
+Content-Type: application/json
+
+{
+  "customerId": 1
+}
+
+### 8. Check Non-Existing Customer Loan Status
+GET http://localhost:3000/customers/loan-status
+Content-Type: application/json
+
+{
+  "customerId": 999
+}
+
+### Update Customer Information Tests
+
+### 9. Update Customer Information (Valid)
+PUT http://localhost:3000/customers/update-info
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "balance": 3000,
+  "debt": 400,
+  "income": 5000
+}
+
+### 10. Update Non-Existing Customer
+PUT http://localhost:3000/customers/update-info
+Content-Type: application/json
+
+{
+  "customerId": 999,
+  "balance": 3000,
+  "debt": 400,
+  "income": 5000
+}
+
+### 11. Update Customer with Missing Fields
+PUT http://localhost:3000/customers/update-info
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "balance": 3000,
+  "income": 5000
+}
+
+### Edge Cases
+
+### 12. Loan Application with Borderline Credit Score (600)
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+    "customerId": 1,
+    "creditScore": 600,
+    "currentDebt": 500,
+    "accountBalance": 1000
+}
+
+### 13. Loan Application with Exactly Minimum Balance
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+    "customerId": 1,
+    "creditScore": 650,
+    "currentDebt": 500,
+    "accountBalance": 1000
+}
+
+### 14. Loan Application with Multiple High Risk Factors
+POST http://localhost:3000/apply-loan
+Content-Type: application/json
+
+{
+    "customerId": 1,
+    "creditScore": 610,
+    "currentDebt": 2000,
+    "accountBalance": 800
+}
+
+
+###### TASK 3 API TESTS: #####
+
+
+### 1. Get All Players
+GET http://localhost:3000/players
+
+### 2. Complete Easy Quest (Success Likely)
+POST http://localhost:3000/complete-quest
+Content-Type: application/json
+
+{
+  "playerId": 1,
+  "questDifficulty": "easy"
+}
+
+### 3. Complete Hard Quest (Challenge)
+POST http://localhost:3000/complete-quest
+Content-Type: application/json
+
+{
+  "playerId": 2,
+  "questDifficulty": "hard"
+}
+
+### 4. Complete Quest with Insufficient Resources
+POST http://localhost:3000/complete-quest
+Content-Type: application/json
+
+{
+  "playerId": 2,
+  "questDifficulty": "moderate"
+}
+
+### 5. Upgrade Player Stats
+PUT http://localhost:3000/players/upgrade-stats
+Content-Type: application/json
+
+{
+  "id": 1,
+  "strength": 5,
+  "agility": 2,
+  "wisdom": 3
+}
+
+### 6. Invalid Quest Difficulty
+POST http://localhost:3000/complete-quest
+Content-Type: application/json
+
+{
+  "playerId": 1,
+  "questDifficulty": "impossible"
+}
+
+### 7. Non-existent Player
+POST http://localhost:3000/complete-quest
+Content-Type: application/json
+
+{
+    "playerId": 999,
+    "questDifficulty": "easy"
+}
+
+### 8. Upgrade Non-existent Player
+PUT http://localhost:3000/players/upgrade-stats
+Content-Type: application/json
+
+{
+    "id": 999,
+    "strength": 5
+}
+
+### 9. Negative Stat Upgrade
+PUT http://localhost:3000/players/upgrade-stats
+Content-Type: application/json
+
+{
+    "id": 1,
+    "strength": -5
+}
+
+
+###### TASK 4 #####
+
+
+### 1. Successful Rescue Mission (Bird, Mild)
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "bird",
+  "severity": "mild"
+}
+
+### 2. Challenging Rescue Mission (Reptile, Severe)
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "reptile",
+  "severity": "severe"
+}
+
+### 3. Medium Difficulty Mission (Mammal, Moderate)
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "mammal",
+  "severity": "moderate"
+}
+
+### 4. Invalid Animal Type
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "fish",
+  "severity": "mild"
+}
+
+### 5. Invalid Severity Level
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "bird",
+  "severity": "extreme"
+}
+
+### 6. Missing Required Fields
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "bird"
+}
+
+### 7. Resource Depletion Test
+# Run multiple severe reptile missions to deplete resources
+POST http://localhost:3000/rescue-mission
+Content-Type: application/json
+
+{
+  "animalType": "reptile",
+  "severity": "severe"
+}
