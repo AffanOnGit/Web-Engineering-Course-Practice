@@ -1,0 +1,1 @@
+This is sample ajax text taken from ajax-practise.txt file

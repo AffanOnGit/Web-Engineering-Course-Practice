@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Practise</title>
+</head>
+
+<body>
+    <h2>The XMLHttpRequest Object</h2>
+    <div id="demo">
+        <button type="button" onclick="loadDoc()">Change Content</button>
+    </div>
+
+    <div id="demo_2">
+        <button type="button" onClick="load_Para_Doc()">Request Data in Para</button>
+        <p id="para-demo"></p>
+    </div>
+
+    
+    <script>
+        function loadDoc() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    document.getElementById('demo').innerHTML = xhr.responseText;
+                }
+            }
+
+            xhr.open("GET", "./ajax-practise.txt", true);
+            xhr.send();
+        }
+    
+        function load_Para_Doc() {
+            const xhr = new XMLHttpRequest();
+            
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    document.getElementById("para-demo").innerHTML = xhr.responseText;
+                }
+            }
+
+            xhr.open("GET", "./ajax-practise.txt", true);
+            xhr.send();
+        }
+        
+    </script>
+</body>
+
+</html>
