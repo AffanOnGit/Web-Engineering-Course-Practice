@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Practise</title>
+</head>
+
+<body>
+    <h1>AJAX Practice</h1>
+
+    <h2>Load XML with JavaScript</h2>
+    <button onclick="loadXMLDoc()">Load XML</button>
+    <table id="xml-table" border="1"></table>
+
+    <h2>Load XML with jQuery</h2>
+    <button onclick="loadXMLWithjQuery()">Load XML with jQuery</button>
+    <table id="jquery-table" border="1"></table>
+
+    <h2>Get JSON File</h2>
+    <button onclick="getJSONFile()">Get JSON File</button>
+
+    <h2>Post Text File</h2>
+    <button onclick="postTextFile()">Post Text File</button>
+
+    <h2>Post XML File</h2>
+    <button onclick="postXMLFile()">Post XML File</button>
+
+    <h2>Post JSON File</h2>
+    <button onclick="postJSONFile()">Post JSON File</button>
+
+
+    <script>
+        function loadDoc() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    document.getElementById('demo').innerHTML = xhr.responseText; //$('demo').html(xhr.responseText);
+                }
+            }
+            xhr.open("GET", "./ajax-practise.txt", true);
+            xhr.send();
+        }
+
+        function load_Para_Doc() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    document.getElementById("para-demo").innerHTML = xhr.responseText;
+                }
+            }
+
+            xhr.open("GET", "./ajax-practise.txt", true);
+            xhr.send();
+        }
+
+
+        //XML file reading
+        function loadXMLDoc() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    displayXML(xhr.responseXML);
+                }
+            };
+
+            xhr.open("GET", "./catalog.xml", true);
+            xhr.send();
+        }
+
+        function displayXML(xmlDoc) {
+            const table = document.getElementById("xml-table");
+            const books = xmlDoc.getElementsByTagName("book");
+
+            // Create table header
+            let html = "<tr><th>Title</th><th>Author</th><th>Price</th></tr>";
+
+            // Add book data
+            for (let i = 0; i < books.length; i++) {
+                html += "<tr>";
+                html += "<td>" + books[i].getElementsByTagName("title")[0].childNodes[0].nodeValue + "</td>";
+                html += "<td>" + books[i].getElementsByTagName("author")[0].childNodes[0].nodeValue + "</td>";
+                html += "<td>" + books[i].getElementsByTagName("price")[0].childNodes[0].nodeValue + "</td>";
+                html += "</tr>";
+            }
+
+            table.innerHTML = html;
+        }
+
+        function loadXMLWithjQuery() {
+            $.ajax({
+                type: "GET",
+                url: "./catalog.xml",
+                dataType: "xml",
+                success: function (xml) {
+                    let html = "<tr><th>Title</th><th>Author</th><th>Price</th></tr>";
+
+                    $(xml).find("book").each(function () {
+                        html += "<tr>";
+                        html += "<td>" + $(this).find("title").text() + "</td>";
+                        html += "<td>" + $(this).find("author").text() + "</td>";
+                        html += "<td>" + $(this).find("price").text() + "</td>";
+                        html += "</tr>";
+                    });
+
+                    $("#jquery-table").html(html);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error loading XML:", error);
+                }
+            });
+        }
+
+        function getJSONFile() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "./data.json", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const jsonResponse = JSON.parse(xhr.responseText);
+                    console.log("JSON file received:", jsonResponse);
+                }
+            };
+            xhr.send();
+        }
+
+
+        // New code for AJAX POST requests
+        function postTextFile() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "./submit.txt", true);
+            xhr.setRequestHeader("Content-Type", "text/plain");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Text file posted successfully");
+                }
+            };
+            xhr.send("This is a sample text content.");
+        }
+
+        function postXMLFile() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "./submit.xml", true);
+            xhr.setRequestHeader("Content-Type", "application/xml");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("XML file posted successfully");
+                }
+            };
+            const xmlData = `<note><to>User</to><from>Copilot</from><message>Hello, World!</message></note>`;
+            xhr.send(xmlData);
+        }
+
+        function postJSONFile() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "./submit.json", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("JSON file posted successfully");
+                }
+            };
+            const jsonData = JSON.stringify({ title: "Sample", body: "This is a sample JSON content." });
+            xhr.send(jsonData);
+        }
+    </script>
+</body>
+
+</html>
